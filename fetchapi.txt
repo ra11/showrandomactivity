@@ -1,0 +1,11 @@
+<h1>Learn how to play new sport</h1>
+
+Type: recreational<br><br>
+
+Participants: 1<br><br>
+
+Price: 0.1<br><br>
+
+Accessibility:0.2<br><br>
+
+Link:<br><br>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .btn {
+            background-color: #04AA6D;
+            color: white;
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+
+        /* Green */
+    </style>
+</head>
+
+<body>
+    <div>
+        <button class="btn" id="btncheck" onclick="getdata()">Generate Random Activity</button>
+        <div id="demo">
+            <h2 id="setup"></h2>
+            <h2 id="punchline"></h2>
+            <div id="loading" class="loading"></div>
+        </div>
+    </div>
+
+    <script>
+        //function getdata(){
+        // document.getElementById("demo").innerHTML = "Hello World";
+        //     let file = "fetchapi.txt"
+        //     let file1="fetchapi1.txt"
+
+
+        // fetch (file)
+        // .then(x => x.text())
+        // .then(y => document.getElementById("demo").innerHTML = y);
+        // }
+        function getdata() {
+           
+            const url = "https://official-joke-api.appspot.com/random_joke";
+            const btncheck = document.querySelector('#btncheck');
+            const setupUi = document.querySelector('#setup');
+            const punchlineUi = document.querySelector('#punchline');
+            const loadingUi = document.querySelector('#loading');
+           
+            let isFetching = false;
+
+        async function api() {
+            if (isFetching) {
+                return;
+            }
+
+            isFetching = true;
+            loadingUi.style.display = 'block';
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                const setup = data.setup;
+                const punchline = data.punchline;
+
+                setupUi.dataset.setup = setup;
+                
+               punchlineUi.dataset.punchline = punchline;
+                setupUi.innerHTML=setupui.dataset.setup
+                punchlineUi.innerHTML = punchlineUi.dataset.punchline;
+            } catch (error) {
+                console.error("Error fetching joke:", error);
+            } finally {
+                isFetching = false;
+                loadingUi.style.display = 'none';
+            }
+        }
+        function reveal() {
+            const setupui=document.querySelector('#setup');
+            const punchlineUi = document.querySelector('#punchline');
+            punchlineUi.innerHTML = punchlineUi.dataset.punchline;
+            setup.innerHTML = setupui.dataset.setup;
+        }
+
+        
+            btncheck.addEventListener('click', reveal);
+            api();
+        
+
+        
+        //    let a= gettxt("https://official-joke-api.appspot.com/random_joke");
+
+        //     console.log(a.setup)
+
+        //     async function gettxt(file) {
+        //         let x = await fetch(file);
+        //         let y = await x.text();
+        //         document.getElementById("demo").innerHTML = y;
+
+
+
+        //     }
+            
+            // const containerEl = document.getElementById("demo");
+            // fetch('https://official-joke-api.appspot.com/random_joke')
+            //   .then((resp) => resp.json())
+            //   .then((data) => {
+            //     for (let i = 0; i != 4; i++) {
+            //       let article = data.results[i];
+            //       containerEl.append(`
+            //           <h1>${article.setup}</h1>
+            //           <p>${article.punchline}</p>
+            //           <p>${article.abstract}</p>`);
+            //     }
+            //   })
+
+
+            //         async function gettxt1(file) {
+            //   let x = await fetch(file);
+            //   let y = await x.text();
+            //   document.getElementById("demo").innerHTML = y;
+            // }
+        }
+
+
+    </script>
+
+</body>
+
+</html>
